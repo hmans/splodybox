@@ -5,8 +5,8 @@ import { Emitter, MeshParticles, ParticlesMaterial } from "vfx";
 
 const direction = new Vector3();
 
-export const DummyEffect = () => (
-  <MeshParticles>
+export const DummyEffect = (props) => (
+  <MeshParticles {...props}>
     <boxGeometry args={[0.1, 0.1, 0.1]} />
 
     <ParticlesMaterial

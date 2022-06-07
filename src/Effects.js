@@ -3,9 +3,6 @@ import { ECS } from "./store";
 
 export const Effects = () => (
   <ECS.ManagedEntities tag="isEffect">
-    {(entity) => {
-      console.log(entity);
-      return <DummyEffect />;
-    }}
+    {(entity) => entity.render}
   </ECS.ManagedEntities>
 );

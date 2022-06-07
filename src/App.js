@@ -12,7 +12,7 @@ function SplodyBox() {
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [scale, setScale] = useState(1);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setDamage(damage + 1);
     setRotation([
       rotation[0] + plusMinus(0.3),
@@ -20,7 +20,7 @@ function SplodyBox() {
       rotation[2],
     ]);
     setScale(scale * between(1.05, 1.1));
-    spawnEffect();
+    spawnEffect(e.point);
   };
 
   const props = useSpring({
