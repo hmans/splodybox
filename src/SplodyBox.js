@@ -16,6 +16,8 @@ export function SplodyBox(props) {
   const entity = ECS.useEntity();
 
   const handleClick = (e) => {
+    e.stopPropagation();
+
     spawnEffect(e.point);
 
     if (damage >= 4) {
