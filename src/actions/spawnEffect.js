@@ -3,7 +3,7 @@ import { ECS } from "../store";
 
 export const spawnEffect = (props) =>
   ECS.world.createEntity({
-    render: <DamageSparks />,
+    render: <DamageSparks {...props} />,
     age: 0,
     autoDestroy: { after: 1 },
   });
