@@ -6,6 +6,7 @@ import { spawnSplodyBox } from "./actions/spawnSplodyBox";
 import { Entities } from "./Entities";
 import { SplodyBoxSpawner } from "./SplodyBoxSpawner";
 import { ECS } from "./store";
+import { SpringOnAppear } from "./util/SpringOnAppear";
 import { Walls } from "./Walls";
 
 function Camera() {
@@ -19,12 +20,6 @@ function Camera() {
 }
 
 function App() {
-  /* TODO: StrictMode double render alert! Let's find a nicer pattern for cleaning up after our actions */
-  useEffect(() => {
-    const entity = spawnSplodyBox();
-    return () => ECS.world.destroyEntity(entity);
-  }, []);
-
   return (
     <Canvas>
       <ambientLight />
@@ -33,7 +28,10 @@ function App() {
 
       <SplodyBoxSpawner />
       <Entities />
-      <Walls />
+
+      <SpringOnAppear>
+        <Walls />
+      </SpringOnAppear>
 
       <Perf />
     </Canvas>
