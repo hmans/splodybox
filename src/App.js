@@ -6,6 +6,7 @@ import { Entities } from "./Entities";
 import { SplodyBoxSpawner } from "./SplodyBoxSpawner";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { Walls } from "./Walls";
+import { Systems } from "./Systems";
 
 function Camera() {
   const camera = useRef();
@@ -48,6 +49,7 @@ function App() {
       </SpringOnAppear>
 
       <Perf />
+      <Systems />
     </Canvas>
   );
 }
