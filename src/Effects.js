@@ -1,4 +1,3 @@
-import { DummyEffect } from "./effects/DummyEffect";
 import { ECS } from "./store";
 
 export const Effects = () => (
