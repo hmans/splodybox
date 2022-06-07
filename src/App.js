@@ -5,7 +5,6 @@ import { between, plusMinus } from "randomish";
 import { useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
 import { Effects } from "./Effects";
-import { DummyEffect } from "./effects/DummyEffect";
 
 function SplodyBox() {
   const [damage, setDamage] = useState(0);
