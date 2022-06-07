@@ -47,7 +47,7 @@ export function Splodycahedron(props) {
         {...animatedProps}
       >
         <dodecahedronGeometry args={[0.8]} />
-        <meshStandardMaterial color="hotpink" />
+        <meshStandardMaterial color="orange" />
       </animated.mesh>
     </SpringOnAppear>
   );

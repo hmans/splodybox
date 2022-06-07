@@ -11,7 +11,7 @@ export const DummyEffect = (props) => (
 
     <ParticlesMaterial
       baseMaterial={MeshStandardMaterial}
-      color="hotpink"
+      color="orange"
       depthTest={true}
       depthWrite={false}
       billboard
