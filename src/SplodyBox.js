@@ -46,7 +46,7 @@ export function SplodyBox(props) {
         receiveShadow
         {...animatedProps}
       >
-        <boxBufferGeometry />
+        <dodecahedronGeometry args={[0.8]} />
         <meshStandardMaterial color="hotpink" />
       </animated.mesh>
     </SpringOnAppear>
