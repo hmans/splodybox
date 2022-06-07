@@ -6,6 +6,7 @@ import { spawnSplodyBox } from "./actions/spawnSplodyBox";
 import { Entities } from "./Entities";
 import { SplodyBoxSpawner } from "./SplodyBoxSpawner";
 import { ECS } from "./store";
+import { Walls } from "./Walls";
 
 function App() {
   /* TODO: StrictMode double render alert! Let's find a nicer pattern for cleaning up after our actions */
@@ -17,11 +18,13 @@ function App() {
   return (
     <Canvas>
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <PerspectiveCamera position={[20, 20, -30]} makeDefault />
+      <directionalLight position={[15, 10, 12]} />
+
+      <PerspectiveCamera position={[20, 20, 30]} makeDefault />
 
       <SplodyBoxSpawner />
       <Entities />
+      <Walls />
 
       <OrbitControls />
       <Perf />
