@@ -4,8 +4,9 @@ import { useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { ECS } from "./store";
+import { Vector3 } from "three";
 
-export function Splodycahedron(props) {
+export function Splodycahedron({ quaternion, ...props }) {
   const [damage, setDamage] = useState(0);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [scale, setScale] = useState(1);
@@ -29,7 +30,7 @@ export function Splodycahedron(props) {
         rotation[1] + plusMinus(0.3),
         rotation[2],
       ]);
-      setScale(scale * between(1.05, 1.1));
+      setScale(scale * 1.1);
     }
   };
 
@@ -40,15 +41,28 @@ export function Splodycahedron(props) {
 
   return (
     <SpringOnAppear {...props}>
-      <animated.mesh
-        onClick={handleClick}
-        castShadow
-        receiveShadow
-        {...animatedProps}
-      >
-        <dodecahedronGeometry args={[0.8]} />
-        <meshStandardMaterial color="orange" />
-      </animated.mesh>
+      <BouncySpring>
+        <animated.mesh
+          onClick={handleClick}
+          castShadow
+          receiveShadow
+          quaternion={quaternion}
+          {...animatedProps}
+        >
+          <dodecahedronGeometry args={[0.8]} />
+          <meshStandardMaterial color="orange" />
+        </animated.mesh>
+      </BouncySpring>
     </SpringOnAppear>
   );
+}
+
+function BouncySpring(props) {
+  const animatedProps = useSpring({
+    from: { "scale-x": 0.5, "scale-y": 1.5 },
+    to: { "scale-x": 1, "scale-y": 1 },
+    reset: true,
+  });
+
+  return <animated.group {...animatedProps} {...props} />;
 }
