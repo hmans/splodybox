@@ -7,6 +7,7 @@ import { SplodyBoxSpawner } from "./SplodyBoxSpawner";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { Walls } from "./Walls";
 import { Systems } from "./Systems";
+import Fog from "./effects/Fog";
 
 function Camera() {
   const camera = useRef();
@@ -47,6 +48,8 @@ function App() {
       <SpringOnAppear>
         <Walls />
       </SpringOnAppear>
+
+      <Fog />
 
       <Perf />
       <Systems />
