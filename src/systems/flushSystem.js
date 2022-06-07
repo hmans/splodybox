@@ -1,5 +1,7 @@
 import { ECS } from "../store";
 
-export default () => {
+const flushSystem = () => {
   ECS.world.queue.flush();
 };
+
+export default flushSystem;
