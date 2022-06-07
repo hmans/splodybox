@@ -4,27 +4,29 @@ import { MeshStandardMaterial } from "three";
 import { Emitter, MeshParticles, ParticlesMaterial } from "vfx";
 
 const direction = new Vector3();
+const gravity = new Vector3(0, -9.81, 0);
 
-export const DummyEffect = (props) => (
+export const Sparks = ({ color = "white", count = 50, ...props }) => (
   <MeshParticles {...props}>
-    <boxGeometry args={[0.1, 0.1, 0.1]} />
+    <planeGeometry args={[0.15, 0.15]} />
 
     <ParticlesMaterial
       baseMaterial={MeshStandardMaterial}
-      color="orange"
+      color={color}
       depthTest={true}
       depthWrite={false}
       billboard
     />
 
     <Emitter
-      initialParticles={50}
+      initialParticles={count}
       setup={(c) => {
         direction.randomDirection();
 
         c.position.copy(direction).multiplyScalar(between(0, 1));
         c.velocity.copy(direction).multiplyScalar(between(0, 3));
-        c.lifetime = 0.5;
+        c.lifetime = between(0.4, 0.8);
+        c.acceleration.copy(gravity);
       }}
     />
   </MeshParticles>
