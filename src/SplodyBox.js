@@ -40,7 +40,12 @@ export function SplodyBox(props) {
 
   return (
     <SpringOnAppear {...props}>
-      <animated.mesh onClick={handleClick} {...animatedProps}>
+      <animated.mesh
+        onClick={handleClick}
+        castShadow
+        receiveShadow
+        {...animatedProps}
+      >
         <boxBufferGeometry />
         <meshStandardMaterial color="hotpink" />
       </animated.mesh>

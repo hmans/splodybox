@@ -1,16 +1,16 @@
 export const Walls = () => (
   <group>
-    <mesh rotation-x={-Math.PI / 2} position-y={-10}>
+    <mesh rotation-x={-Math.PI / 2} position-y={-10} receiveShadow>
       <planeGeometry args={[20, 20]} />
       <meshStandardMaterial color="#666" />
     </mesh>
 
-    <mesh rotation-y={Math.PI / 2} position-x={-10}>
+    <mesh rotation-y={Math.PI / 2} position-x={-10} receiveShadow>
       <planeGeometry args={[20, 20]} />
       <meshStandardMaterial color="#666" />
     </mesh>
 
-    <mesh position-z={-10}>
+    <mesh position-z={-10} receiveShadow>
       <planeGeometry args={[20, 20]} />
       <meshStandardMaterial color="#666" />
     </mesh>

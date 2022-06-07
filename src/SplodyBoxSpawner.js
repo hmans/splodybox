@@ -7,7 +7,7 @@ export function SplodyBoxSpawner() {
   useEffect(() => {
     const id = setInterval(() => {
       spawnSplodyBox(
-        new Vector3().set(plusMinus(10), plusMinus(10), plusMinus(10))
+        new Vector3().set(plusMinus(8), plusMinus(8), plusMinus(8))
       );
     }, 1000);
 
