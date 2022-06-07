@@ -20,6 +20,8 @@ function Camera() {
 function App() {
   return (
     <Canvas shadows>
+      <color attach="background" args={["#555"]} />
+      <fogExp2 attach="fog" args={["#555", 0.01]} />
       <ambientLight intensity={0.5} />
 
       <pointLight
