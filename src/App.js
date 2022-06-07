@@ -1,20 +1,14 @@
 import { PerspectiveCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { Perf } from "r3f-perf";
 import { useEffect, useRef } from "react";
+import Fog from "./effects/Fog";
 import { Entities } from "./Entities";
 import { SplodyBoxSpawner } from "./SplodyBoxSpawner";
+import { Systems } from "./Systems";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { Walls } from "./Walls";
-import { Systems } from "./Systems";
-import Fog from "./effects/Fog";
-import {
-  Bloom,
-  DepthOfField,
-  EffectComposer,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
 
 function Camera() {
   const camera = useRef();
@@ -31,8 +25,9 @@ function App() {
     <Canvas
       flat
       shadows
+      dpr={[1, 1]}
       gl={{
-        logarithmicDepthBuffer: true,
+        logarithmicDepthBuffer: false,
         antialias: false,
         stencil: false,
         depth: false,
