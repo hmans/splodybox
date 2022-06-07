@@ -5,7 +5,7 @@ import { spawnEffect } from "./actions/spawnEffect";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { ECS } from "./store";
 
-export function SplodyBox(props) {
+export function Splodycahedron(props) {
   const [damage, setDamage] = useState(0);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [scale, setScale] = useState(1);
