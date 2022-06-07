@@ -2,6 +2,7 @@ import { animated, useSpring } from "@react-spring/three";
 import { between, plusMinus } from "randomish";
 import { useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
+import { SpringOnAppear } from "./util/SpringOnAppear";
 import { ECS } from "./store";
 
 export function SplodyBox(props) {
@@ -36,9 +37,11 @@ export function SplodyBox(props) {
   });
 
   return (
-    <animated.mesh onClick={handleClick} {...props} {...animatedProps}>
-      <boxBufferGeometry />
-      <meshStandardMaterial color="hotpink" />
-    </animated.mesh>
+    <SpringOnAppear {...props}>
+      <animated.mesh onClick={handleClick} {...animatedProps}>
+        <boxBufferGeometry />
+        <meshStandardMaterial color="hotpink" />
+      </animated.mesh>
+    </SpringOnAppear>
   );
 }
