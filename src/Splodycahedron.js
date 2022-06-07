@@ -19,7 +19,7 @@ export function Splodycahedron({ quaternion, ...props }) {
   const handleClick = (e) => {
     e.stopPropagation();
 
-    spawnEffect(e.point);
+    spawnEffect({ position: e.point });
 
     if (damage >= 4) {
       ECS.world.destroyEntity(entity);
