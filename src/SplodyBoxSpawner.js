@@ -3,14 +3,18 @@ import { useEffect } from "react";
 import { Quaternion } from "three";
 import { Vector3 } from "three";
 import { spawnSplodycahedron } from "./actions/spawnSplodycahedron";
+import { ECS } from "./store";
+
+const { entities } = ECS.world.archetype("isSplodycahedron");
 
 export function SplodyBoxSpawner() {
   useEffect(() => {
     const id = setInterval(() => {
-      spawnSplodycahedron({
-        position: new Vector3().set(plusMinus(8), plusMinus(8), plusMinus(8)),
-        quaternion: new Quaternion().random(),
-      });
+      if (entities.length < 30)
+        spawnSplodycahedron({
+          position: new Vector3().set(plusMinus(8), plusMinus(8), plusMinus(8)),
+          quaternion: new Quaternion().random(),
+        });
     }, 1000);
 
     return () => clearInterval(id);
