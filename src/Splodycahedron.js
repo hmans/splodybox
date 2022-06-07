@@ -50,7 +50,11 @@ export function Splodycahedron({ quaternion, ...props }) {
           {...animatedProps}
         >
           <dodecahedronGeometry args={[0.8]} />
-          <meshStandardMaterial color="orange" />
+          <meshStandardMaterial
+            color="orange"
+            emissive="orange"
+            emissiveIntensity={1.2}
+          />
         </animated.mesh>
       </BouncySpring>
     </SpringOnAppear>

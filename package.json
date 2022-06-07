@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-spring/three": "^9.4.5",
     "@react-three/drei": "^9.13.0",
     "@react-three/fiber": "^8.0.22",
+    "@react-three/postprocessing": "^2.3.2",
     "miniplex": "^0.10.1",
     "miniplex-react": "^0.4.1",
     "r3f-perf": "^6.2.6",
@@ -12,7 +14,6 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
-    "@react-spring/three": "^9.4.5",
     "three": "^0.141.0",
     "vfx": "^0.0.13"
   },

@@ -8,6 +8,13 @@ import { SpringOnAppear } from "./util/SpringOnAppear";
 import { Walls } from "./Walls";
 import { Systems } from "./Systems";
 import Fog from "./effects/Fog";
+import {
+  Bloom,
+  DepthOfField,
+  EffectComposer,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 function Camera() {
   const camera = useRef();
@@ -21,7 +28,16 @@ function Camera() {
 
 function App() {
   return (
-    <Canvas flat shadows>
+    <Canvas
+      flat
+      shadows
+      gl={{
+        logarithmicDepthBuffer: true,
+        antialias: false,
+        stencil: false,
+        depth: false,
+      }}
+    >
       <color attach="background" args={["#555"]} />
       <fogExp2 attach="fog" args={["#555", 0.01]} />
       <ambientLight intensity={0.5} />
@@ -53,6 +69,12 @@ function App() {
 
       <Perf />
       <Systems />
+
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.9} luminanceSmoothing={0.9} height={300} />
+        {/* <Noise opacity={0.02} /> */}
+        <Vignette eskil={false} offset={0.1} darkness={1.1} />
+      </EffectComposer>
     </Canvas>
   );
 }
