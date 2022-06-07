@@ -3,11 +3,14 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { between, plusMinus } from "randomish";
 import { useState } from "react";
+import { spawnEffect } from "./actions/spawnEffect";
+import { Effects } from "./Effects";
+import { DummyEffect } from "./effects/DummyEffect";
 
 function SplodyBox() {
   const [damage, setDamage] = useState(0);
   const [rotation, setRotation] = useState([0, 0, 0]);
-  const [scale, setScale] = useState(0.5);
+  const [scale, setScale] = useState(1);
 
   const handleClick = () => {
     setDamage(damage + 1);
@@ -17,6 +20,7 @@ function SplodyBox() {
       rotation[2],
     ]);
     setScale(scale * between(1.05, 1.1));
+    spawnEffect();
   };
 
   const props = useSpring({
@@ -39,6 +43,7 @@ function App() {
       <pointLight position={[10, 10, 10]} />
 
       <SplodyBox />
+      <Effects />
 
       <OrbitControls />
     </Canvas>
