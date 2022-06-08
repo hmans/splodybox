@@ -1,10 +1,9 @@
 import { animated, useSpring } from "@react-spring/three";
-import { between, plusMinus } from "randomish";
+import { plusMinus } from "randomish";
 import { useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
-import { SpringOnAppear } from "./util/SpringOnAppear";
 import { ECS } from "./store";
-import { Vector3 } from "three";
+import { SpringOnAppear } from "./util/SpringOnAppear";
 
 export function Splodycahedron({ quaternion, ...props }) {
   const [damage, setDamage] = useState(0);
