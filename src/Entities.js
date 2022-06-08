@@ -1,7 +1,5 @@
-import { ECS } from "./store";
+import { ManagedEntities } from "./store";
 
 export const Entities = () => (
-  <ECS.ManagedEntities tag="render">
-    {(entity) => entity.render}
-  </ECS.ManagedEntities>
+  <ManagedEntities tag="render">{(entity) => entity.render}</ManagedEntities>
 );

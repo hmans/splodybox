@@ -1,7 +1,7 @@
-import { ECS } from "../store";
+import { world } from "../store";
 
 export const spawnEffect = (render) =>
-  ECS.world.createEntity({
+  world.createEntity({
     render,
     age: 0,
     autoDestroy: { after: 1 },

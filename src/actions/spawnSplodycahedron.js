@@ -1,9 +1,9 @@
 import { Tag } from "miniplex";
 import { Splodycahedron } from "../Splodycahedron";
-import { ECS } from "../store";
+import { world } from "../store";
 
 export const spawnSplodycahedron = (props) =>
-  ECS.world.createEntity({
+  world.createEntity({
     isSplodycahedron: Tag,
     render: <Splodycahedron {...props} />,
   });

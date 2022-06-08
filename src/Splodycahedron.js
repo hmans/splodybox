@@ -3,7 +3,7 @@ import { plusMinus } from "randomish";
 import { useRef, useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
 import { BouncySpring } from "./util/BouncySpring";
-import { ECS } from "./store";
+import { useEntity, world } from "./store";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { DamageSparks } from "./effects/DamageSparks";
 import { Sparks } from "./effects/Sparks";
@@ -19,7 +19,7 @@ export function Splodycahedron({ quaternion, ...props }) {
   /* TODO: I don't like that this assumes that it's being rendered within an entity.
      There may be situations where this is not the case (ie. the component is just rendered
      through plain JSX), and then `useEntity` could pick up _anything_.) */
-  const entity = ECS.useEntity();
+  const entity = useEntity();
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -27,7 +27,7 @@ export function Splodycahedron({ quaternion, ...props }) {
     spawnEffect(<DamageSparks position={e.point} />);
 
     if (damage >= 4) {
-      ECS.world.destroyEntity(entity);
+      world.destroyEntity(entity);
       spawnEffect(
         <group position={mesh.current.position} scale={3}>
           <Sparks color="hotpink" scale={1} />

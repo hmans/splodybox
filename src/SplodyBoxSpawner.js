@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Quaternion } from "three";
 import { Vector3 } from "three";
 import { spawnSplodycahedron } from "./actions/spawnSplodycahedron";
-import { ECS } from "./store";
+import { world } from "./store";
 
-const { entities } = ECS.world.archetype("isSplodycahedron");
+const { entities } = world.archetype("isSplodycahedron");
 
 export function SplodyBoxSpawner() {
   useEffect(() => {

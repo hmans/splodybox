@@ -1,6 +1,6 @@
-import { ECS } from "../store";
+import { world } from "../store";
 
-const { entities } = ECS.world.archetype("age");
+const { entities } = world.archetype("age");
 
 const ageSystem = (dt) => {
   for (const entity of entities) {

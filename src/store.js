@@ -1,3 +1,3 @@
 import { createECS } from "miniplex-react";
 
-export const ECS = createECS();
+export const { ManagedEntities, world, useEntity } = createECS();
