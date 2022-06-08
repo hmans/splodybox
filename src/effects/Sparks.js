@@ -7,7 +7,7 @@ const direction = new Vector3();
 const gravity = new Vector3(0, -9.81, 0);
 
 export const Sparks = ({ color = "white", count = 50, ...props }) => (
-  <MeshParticles {...props}>
+  <MeshParticles renderOrder={100} {...props}>
     <planeGeometry args={[0.15, 0.15]} />
 
     <ParticlesMaterial
