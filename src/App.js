@@ -17,7 +17,7 @@ function Camera() {
     camera.current.lookAt(0, 0, 0);
   }, []);
 
-  return <PerspectiveCamera position={[30, 18, 30]} makeDefault ref={camera} />;
+  return <PerspectiveCamera position={[25, 16, 25]} makeDefault ref={camera} />;
 }
 
 function App() {
