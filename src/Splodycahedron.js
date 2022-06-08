@@ -5,7 +5,8 @@ import { spawnEffect } from "./actions/spawnEffect";
 import { BouncySpring } from "./util/BouncySpring";
 import { ECS } from "./store";
 import { SpringOnAppear } from "./util/SpringOnAppear";
-import { Color } from "three";
+import { DamageSparks } from "./effects/DamageSparks";
+import { Sparks } from "./effects/Sparks";
 
 const colors = ["#c80", "#c60", "#c40", "#c20"];
 
@@ -23,11 +24,17 @@ export function Splodycahedron({ quaternion, ...props }) {
   const handleClick = (e) => {
     e.stopPropagation();
 
-    spawnEffect({ position: e.point });
+    spawnEffect(<DamageSparks position={e.point} />);
 
     if (damage >= 4) {
       ECS.world.destroyEntity(entity);
-      spawnEffect({ position: mesh.current.position });
+      spawnEffect(
+        <group position={mesh.current.position} scale={3}>
+          <Sparks color="hotpink" scale={1} />
+          <Sparks color="white" scale={1.3} />
+          <Sparks color="red" scale={1.5} />
+        </group>
+      );
     } else {
       setDamage(damage + 1);
       setRotation([

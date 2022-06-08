@@ -1,9 +1,8 @@
-import { DamageSparks } from "../effects/DamageSparks";
 import { ECS } from "../store";
 
-export const spawnEffect = (props) =>
+export const spawnEffect = (render) =>
   ECS.world.createEntity({
-    render: <DamageSparks {...props} />,
+    render,
     age: 0,
     autoDestroy: { after: 1 },
   });
