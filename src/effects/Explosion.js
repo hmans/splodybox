@@ -99,7 +99,11 @@ const Dirt = ({ delay = 0 }) => (
 const Fireball = ({ delay = 0 }) => (
   <MeshParticles>
     <sphereBufferGeometry args={[1, 8, 8]} />
-    <ParticlesMaterial baseMaterial={MeshStandardMaterial} color="#fff" />
+    <ParticlesMaterial
+      baseMaterial={MeshStandardMaterial}
+      color="#fff"
+      emissive="white"
+    />
 
     <Emitter
       initialDelay={delay}
@@ -116,7 +120,7 @@ const Fireball = ({ delay = 0 }) => (
         c.lifetime = between(0.5, 1);
 
         c.colorStart.lerpColors(
-          new Color("red").multiplyScalar(6),
+          new Color("white").multiplyScalar(10),
           new Color("yellow").multiplyScalar(10),
           power(3)
         );
