@@ -1,6 +1,6 @@
 import { animated, useSpring } from "@react-spring/three";
 import { plusMinus } from "randomish";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
 import { BouncySpring } from "./util/BouncySpring";
 import { ECS } from "./store";
@@ -13,6 +13,7 @@ export function Splodycahedron({ quaternion, ...props }) {
   const [damage, setDamage] = useState(0);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [scale, setScale] = useState(1);
+  const mesh = useRef();
 
   /* TODO: I don't like that this assumes that it's being rendered within an entity.
      There may be situations where this is not the case (ie. the component is just rendered
@@ -26,6 +27,7 @@ export function Splodycahedron({ quaternion, ...props }) {
 
     if (damage >= 4) {
       ECS.world.destroyEntity(entity);
+      spawnEffect({ position: mesh.current.position });
     } else {
       setDamage(damage + 1);
       setRotation([
@@ -43,7 +45,7 @@ export function Splodycahedron({ quaternion, ...props }) {
   });
 
   return (
-    <SpringOnAppear {...props}>
+    <SpringOnAppear {...props} ref={mesh}>
       <BouncySpring>
         <animated.mesh
           onClick={handleClick}
