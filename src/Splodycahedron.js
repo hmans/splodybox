@@ -29,7 +29,7 @@ export function Splodycahedron({ quaternion, ...props }) {
 
     if (damage >= 4) {
       world.destroyEntity(entity);
-      spawnEffect(<Explosion position={mesh.current.position} />);
+      spawnEffect(<Explosion position={mesh.current.position} scale={0.3} />);
     } else {
       setDamage(damage + 1);
       setRotation([

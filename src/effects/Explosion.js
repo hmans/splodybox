@@ -1,46 +1,64 @@
 import { between, plusMinus, power } from "randomish";
+import { useMemo } from "react";
+import { MeshBasicMaterial } from "three";
+import { AdditiveBlending } from "three";
+import { TextureLoader } from "three";
 import { Color, MeshStandardMaterial, Vector3 } from "three";
 import { Emitter, MeshParticles, ParticlesMaterial } from "vfx";
 
 const gravity = new Vector3(0, -20, 0);
 const direction = new Vector3();
 
-const SmokeRing = ({ delay = 0 }) => (
-  <MeshParticles>
-    <sphereBufferGeometry args={[0.3, 8, 8]} />
-    <ParticlesMaterial baseMaterial={MeshStandardMaterial} color="white" />
+const SmokeRing = () => {
+  const texture = useMemo(
+    () => new TextureLoader().load("/textures/smoke.png"),
+    []
+  );
 
-    <Emitter
-      initialDelay={delay}
-      burstParticles={() => between(10, 20)}
-      initialParticles={() => between(10, 20)}
-      burstCount={5}
-      burstDelay={0.025}
-      setup={(c) => {
-        direction.randomDirection();
-        // .set(1, 0, 0)
-        // .applyAxisAngle(new Vector3(0, 1, 0), between(0, Math.PI * 2));
+  return (
+    <MeshParticles>
+      <planeGeometry />
 
-        c.position.copy(direction).multiplyScalar(plusMinus(0.2));
+      <ParticlesMaterial
+        baseMaterial={MeshStandardMaterial}
+        map={texture}
+        blending={AdditiveBlending}
+        depthTest={true}
+        depthWrite={false}
+        billboard
+      />
 
-        c.velocity.copy(direction).multiplyScalar(5 + plusMinus(3));
+      <Emitter
+        burstParticles={() => between(10, 20)}
+        initialParticles={() => between(10, 20)}
+        burstCount={8}
+        burstDelay={0.025}
+        setup={(c) => {
+          c.lifetime = 2;
 
-        c.acceleration
-          .copy(direction)
-          .multiplyScalar(-3)
-          .add(new Vector3().randomDirection().multiplyScalar(10));
+          direction.randomDirection();
 
-        c.scaleStart.setScalar(1 + plusMinus(0.3));
-        c.scaleEnd.setScalar(0);
+          c.position.copy(direction).multiplyScalar(plusMinus(0.2));
 
-        c.lifetime = between(0.5, 1.5);
+          c.velocity.copy(direction).multiplyScalar(5 + plusMinus(10));
 
-        c.colorStart.setScalar(1);
-        c.colorEnd.setScalar(0);
-      }}
-    />
-  </MeshParticles>
-);
+          c.acceleration
+            .copy(direction)
+            .multiplyScalar(-3)
+            .add(new Vector3().randomDirection().multiplyScalar(5));
+
+          c.scaleStart.setScalar(3 + plusMinus(1));
+          c.scaleEnd.setScalar(0);
+
+          c.lifetime = between(0.5, 1.5);
+
+          c.colorStart.setScalar(1);
+          c.colorEnd.setScalar(0);
+        }}
+      />
+    </MeshParticles>
+  );
+};
 
 const Dirt = ({ delay = 0 }) => (
   <MeshParticles>
@@ -98,7 +116,7 @@ const Fireball = ({ delay = 0 }) => (
         c.lifetime = between(0.5, 1);
 
         c.colorStart.lerpColors(
-          new Color("red").multiplyScalar(5),
+          new Color("red").multiplyScalar(6),
           new Color("yellow").multiplyScalar(10),
           power(3)
         );
@@ -108,53 +126,70 @@ const Fireball = ({ delay = 0 }) => (
   </MeshParticles>
 );
 
-const SmokeCloud = ({ delay = 0 }) => (
-  <MeshParticles>
-    <sphereBufferGeometry args={[1, 8, 8]} />
-    <ParticlesMaterial
-      baseMaterial={MeshStandardMaterial}
-      color="#fff"
-      depthWrite={false}
-    />
+const SmokeCloud = ({ delay = 0 }) => {
+  const texture = useMemo(
+    () => new TextureLoader().load("/textures/smoke.png"),
+    []
+  );
 
-    <Emitter
-      initialDelay={delay}
-      initialParticles={() => between(5, 10)}
-      burstParticles={() => between(5, 10)}
-      burstCount={5}
-      burstDelay={0.05}
-      setup={(c) => {
-        direction.randomDirection();
+  return (
+    <MeshParticles>
+      <planeGeometry />
 
-        c.position.copy(direction).multiplyScalar(between(0.5, 3));
+      <ParticlesMaterial
+        baseMaterial={MeshStandardMaterial}
+        color="#fff"
+        depthWrite={false}
+        map={texture}
+        billboard
+      />
 
-        c.velocity
-          .copy(direction)
-          .multiplyScalar(between(2, 5))
-          .add(new Vector3(0, between(2, 3), 0));
+      <Emitter
+        initialDelay={delay}
+        initialParticles={() => between(5, 10)}
+        burstParticles={() => between(5, 10)}
+        burstCount={5}
+        burstDelay={0.05}
+        setup={(c) => {
+          direction.randomDirection();
 
-        c.acceleration
-          .randomDirection()
-          .multiplyScalar(between(0, 3))
-          .add(direction.clone().multiplyScalar(-between(2, 5)));
+          c.position.copy(direction).multiplyScalar(between(0.5, 3));
 
-        c.scaleStart.setScalar(between(0.1, 0.2));
-        c.scaleEnd.setScalar(between(3, 6));
-        c.lifetime = between(1, 2);
+          c.velocity
+            .copy(direction)
+            .multiplyScalar(between(2, 5))
+            .add(new Vector3(0, between(2, 3), 0));
 
-        c.colorStart.lerpColors(new Color("#888"), new Color("#666"), power(3));
-        c.colorEnd.copy(c.colorStart);
-      }}
-    />
-  </MeshParticles>
-);
+          c.acceleration
+            .randomDirection()
+            .multiplyScalar(between(0, 3))
+            .add(direction.clone().multiplyScalar(-between(2, 5)));
+
+          c.scaleStart.setScalar(between(1, 5));
+          c.scaleEnd.setScalar(between(5, 10));
+          c.lifetime = between(1, 2);
+
+          c.alphaStart = 0.3;
+          c.alphaEnd = 0;
+
+          c.colorStart.lerpColors(
+            new Color("#888"),
+            new Color("#666"),
+            power(3)
+          );
+          c.colorEnd.copy(c.colorStart);
+        }}
+      />
+    </MeshParticles>
+  );
+};
 
 const Explosion = (props) => (
   <group {...props}>
     <SmokeRing />
-    {/* <Dirt />
+    <Dirt />
     <Fireball />
-    <SmokeCloud delay={0.3} /> */}
+    <SmokeCloud delay={0.3} />
   </group>
 );
 
