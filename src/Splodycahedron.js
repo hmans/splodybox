@@ -7,6 +7,7 @@ import { useEntity, world } from "./store";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 import { DamageSparks } from "./effects/DamageSparks";
 import { Sparks } from "./effects/Sparks";
+import Explosion from "./effects/Explosion";
 
 const colors = ["#c80", "#c60", "#c40", "#c20"];
 
@@ -28,13 +29,7 @@ export function Splodycahedron({ quaternion, ...props }) {
 
     if (damage >= 4) {
       world.destroyEntity(entity);
-      spawnEffect(
-        <group position={mesh.current.position} scale={3}>
-          <Sparks color="hotpink" scale={1} />
-          <Sparks color="white" scale={1.3} />
-          <Sparks color="red" scale={1.5} />
-        </group>
-      );
+      spawnEffect(<Explosion position={mesh.current.position} />);
     } else {
       setDamage(damage + 1);
       setRotation([

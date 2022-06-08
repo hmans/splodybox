@@ -4,5 +4,5 @@ export const spawnEffect = (render) =>
   world.createEntity({
     render,
     age: 0,
-    autoDestroy: { after: 1 },
+    autoDestroy: { after: 2 },
   });
