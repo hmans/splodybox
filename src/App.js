@@ -67,7 +67,6 @@ function App() {
 
       <EffectComposer>
         <Bloom luminanceThreshold={0.9} luminanceSmoothing={0.9} height={300} />
-        {/* <Noise opacity={0.02} /> */}
         <Vignette eskil={false} offset={0.1} darkness={1.1} />
       </EffectComposer>
     </Canvas>
