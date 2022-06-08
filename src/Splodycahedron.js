@@ -2,6 +2,7 @@ import { animated, useSpring } from "@react-spring/three";
 import { plusMinus } from "randomish";
 import { useState } from "react";
 import { spawnEffect } from "./actions/spawnEffect";
+import { BouncySpring } from "./util/BouncySpring";
 import { ECS } from "./store";
 import { SpringOnAppear } from "./util/SpringOnAppear";
 
@@ -58,14 +59,4 @@ export function Splodycahedron({ quaternion, ...props }) {
       </BouncySpring>
     </SpringOnAppear>
   );
-}
-
-function BouncySpring(props) {
-  const animatedProps = useSpring({
-    from: { "scale-x": 0.75, "scale-y": 1.25, "scale-z": 0.75 },
-    to: { "scale-x": 1, "scale-y": 1, "scale-z": 1 },
-    reset: true,
-  });
-
-  return <animated.group {...animatedProps} {...props} />;
 }
