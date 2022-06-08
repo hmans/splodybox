@@ -5,6 +5,9 @@ import { spawnEffect } from "./actions/spawnEffect";
 import { BouncySpring } from "./util/BouncySpring";
 import { ECS } from "./store";
 import { SpringOnAppear } from "./util/SpringOnAppear";
+import { Color } from "three";
+
+const colors = ["#c80", "#c60", "#c40", "#c20"];
 
 export function Splodycahedron({ quaternion, ...props }) {
   const [damage, setDamage] = useState(0);
@@ -51,8 +54,8 @@ export function Splodycahedron({ quaternion, ...props }) {
         >
           <dodecahedronGeometry args={[0.8]} />
           <meshStandardMaterial
-            color="orange"
-            emissive="orange"
+            color={colors[damage] || "#c00"}
+            emissive={colors[damage] || "#c00"}
             emissiveIntensity={1.2}
           />
         </animated.mesh>
